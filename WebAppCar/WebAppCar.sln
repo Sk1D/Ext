@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppCar", "WebAppCar\WebAppCar.csproj", "{58C73124-11F0-4468-9B66-15C9CEB3B9C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppCar.BL", "WebAppCar.BL\WebAppCar.BL.csproj", "{3C5F4307-402B-4D43-95EC-ADB1BD6ADAFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppCar.DAL", "WebAppCar.DAL\WebAppCar.DAL.csproj", "{3980C288-DFDF-4CBE-A274-04E765036629}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58C73124-11F0-4468-9B66-15C9CEB3B9C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C73124-11F0-4468-9B66-15C9CEB3B9C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C73124-11F0-4468-9B66-15C9CEB3B9C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C73124-11F0-4468-9B66-15C9CEB3B9C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5F4307-402B-4D43-95EC-ADB1BD6ADAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5F4307-402B-4D43-95EC-ADB1BD6ADAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5F4307-402B-4D43-95EC-ADB1BD6ADAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5F4307-402B-4D43-95EC-ADB1BD6ADAFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3980C288-DFDF-4CBE-A274-04E765036629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3980C288-DFDF-4CBE-A274-04E765036629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3980C288-DFDF-4CBE-A274-04E765036629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3980C288-DFDF-4CBE-A274-04E765036629}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
