@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebAppCar.DAL.Entities;
 using WebAppCar.DAL.Interfaces;
 
 namespace WebAppCar.DAL.Repositories
 {
-    class CarRepository : IRepository<Car>
+    public class CarRepository : IRepository<Car>
     {
         private CarContext db;
         public CarRepository(CarContext context)
@@ -42,7 +40,7 @@ namespace WebAppCar.DAL.Repositories
 
         public IEnumerable<Car> GetAll()
         {
-            return db.Cars;
+                return db.Cars;
         }
 
         public void Update(Car value)

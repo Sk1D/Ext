@@ -6,7 +6,7 @@ D:\TZ\work\WebAppCar\WebAppCar.DAL\bin\Debug\EntityFramework.SqlServer.dll
 D:\TZ\work\WebAppCar\WebAppCar.DAL\bin\Debug\EntityFramework.xml
 D:\TZ\work\WebAppCar\WebAppCar.DAL\bin\Debug\EntityFramework.SqlServer.xml
 D:\TZ\work\WebAppCar\WebAppCar.DAL\obj\Debug\WebAppCar.DAL.csprojResolveAssemblyReference.cache
-D:\TZ\work\WebAppCar\WebAppCar.DAL\obj\Debug\WebAppCar.DAL.dll
-D:\TZ\work\WebAppCar\WebAppCar.DAL\obj\Debug\WebAppCar.DAL.pdb
 D:\TZ\work\WebAppCar\WebAppCar.DAL\obj\Debug\WebAppCar.DAL.Migrations.initial.resources
 D:\TZ\work\WebAppCar\WebAppCar.DAL\obj\Debug\WebAppCar.DAL.csproj.GenerateResource.Cache
+D:\TZ\work\WebAppCar\WebAppCar.DAL\obj\Debug\WebAppCar.DAL.dll
+D:\TZ\work\WebAppCar\WebAppCar.DAL\obj\Debug\WebAppCar.DAL.pdb

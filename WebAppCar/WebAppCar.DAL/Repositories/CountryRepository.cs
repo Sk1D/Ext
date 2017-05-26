@@ -8,7 +8,7 @@ using WebAppCar.DAL.Interfaces;
 
 namespace WebAppCar.DAL.Repositories
 {
-    class CountryRepository : IRepository<Country>
+    public class CountryRepository : IRepository<Country>
     {
         private CarContext db;
         public CountryRepository(CarContext context)
