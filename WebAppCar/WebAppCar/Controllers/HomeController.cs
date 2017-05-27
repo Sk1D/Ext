@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+//using System.Web.Http;
 using System.Web.Mvc;
 using WebAppCar.BL;
 using WebAppCar.BL.DTO;
+
 using WebAppCar.ViewModel;
+
 
 namespace WebAppCar.Controllers
 {
@@ -36,6 +39,52 @@ namespace WebAppCar.Controllers
             var val =
                 Mapper.Map<IEnumerable<CountryDTO>, List<CountryViewModel>>(contr);
             return View(val);
+        }
+        [HttpGet]
+        public ActionResult DeleteCar(int? id)
+        {
+            serv.DelCar(id.Value);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult CreateCar(int? id)
+        {
+            if(id==null)
+                return View();
+            else
+            {
+                CarDTO value = serv.GetCarById(id.Value);
+                Mapper.Initialize(cfg => cfg.CreateMap<CarDTO, CarViewModel>());
+                var result =
+                    Mapper.Map<CarDTO, CarViewModel>(value);
+                return View(result);
+            }
+        }
+        [HttpPost]
+        public ActionResult CreateCar(CarViewModel car)
+        {
+            if(car.Model==null || car.Brand==null)
+            {
+                return View(car);
+            }
+            else 
+            {
+                try
+                {
+                    Mapper.Initialize(cfg => cfg.CreateMap<CarViewModel, CarDTO>());
+                    var val =
+                        Mapper.Map<CarViewModel, CarDTO>(car);
+                    serv.AddCar(val);
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception e)
+                {
+                    throw new Exception("Error data automapper", e);
+                }
+            }
+ 
         }
     }
 }

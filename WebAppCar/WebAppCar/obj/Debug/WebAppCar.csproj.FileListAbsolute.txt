@@ -43,3 +43,11 @@ D:\TZ\work\WebAppCar\WebAppCar\obj\Debug\WebAppCar.dll
 D:\TZ\work\WebAppCar\WebAppCar\obj\Debug\WebAppCar.pdb
 D:\TZ\work\WebAppCar\WebAppCar\bin\EntityFramework.SqlServer.dll
 D:\TZ\work\WebAppCar\WebAppCar\bin\EntityFramework.SqlServer.xml
+D:\TZ\work\WebAppCar\WebAppCar\bin\Newtonsoft.Json.dll
+D:\TZ\work\WebAppCar\WebAppCar\bin\System.Net.Http.Formatting.dll
+D:\TZ\work\WebAppCar\WebAppCar\bin\System.Web.Http.dll
+D:\TZ\work\WebAppCar\WebAppCar\bin\System.Web.Http.WebHost.dll
+D:\TZ\work\WebAppCar\WebAppCar\bin\Newtonsoft.Json.xml
+D:\TZ\work\WebAppCar\WebAppCar\bin\System.Net.Http.Formatting.xml
+D:\TZ\work\WebAppCar\WebAppCar\bin\System.Web.Http.xml
+D:\TZ\work\WebAppCar\WebAppCar\bin\System.Web.Http.WebHost.xml
