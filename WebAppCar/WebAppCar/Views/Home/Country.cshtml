@@ -1,14 +1,8 @@
 ﻿@model IEnumerable<WebAppCar.ViewModel.CountryViewModel>
-
 @{
-    ViewBag.Title = "Country";
+    Layout = null;
 }
 
-<h2>Country</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -29,11 +23,14 @@
             @Html.DisplayFor(modelItem => item.NameOfContry)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "CreateCountry", "ExtNet", new { id=item.Id },null) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "DeleteCountry", "ExtNet", new { id=item.Id },null)
         </td>
     </tr>
 }
 
 </table>
+<p>
+    @Html.ActionLink("Create New", "CreateCountry", "ExtNet")
+</p>

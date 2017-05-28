@@ -32,6 +32,10 @@ namespace WebAppCar.Controllers
 
 
         }
+        public ActionResult Page2()
+        {
+            return View();
+        }
         public ActionResult Country()
         {
             IEnumerable<CountryDTO> contr = serv.GetAllCountries();

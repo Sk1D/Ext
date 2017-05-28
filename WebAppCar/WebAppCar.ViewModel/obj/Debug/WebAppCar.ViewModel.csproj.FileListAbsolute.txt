@@ -1,5 +1,0 @@
-D:\TZ\work\WebAppCar\WebAppCar.ViewModel\bin\Debug\WebAppCar.ViewModel.dll
-D:\TZ\work\WebAppCar\WebAppCar.ViewModel\bin\Debug\WebAppCar.ViewModel.pdb
-D:\TZ\work\WebAppCar\WebAppCar.ViewModel\obj\Debug\WebAppCar.ViewModel.csprojResolveAssemblyReference.cache
-D:\TZ\work\WebAppCar\WebAppCar.ViewModel\obj\Debug\WebAppCar.ViewModel.dll
-D:\TZ\work\WebAppCar\WebAppCar.ViewModel\obj\Debug\WebAppCar.ViewModel.pdb

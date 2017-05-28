@@ -17,5 +17,6 @@ namespace WebAppCar.BL
         void DelCountry(int? id);
         void Dispose();
         CarDTO GetCarById(int? id);
+        CountryDTO GetCountryById(int? Id);
     }
 }

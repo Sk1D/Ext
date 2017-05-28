@@ -40,7 +40,17 @@ namespace WebAppCar.BL
 
         public void AddCountry(CountryDTO countryDto)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.CreateMap<CountryDTO, Country>());
+            Country _country = Mapper.Map<CountryDTO, Country>(countryDto);
+            if(countryDto.Id==0)
+            {
+                Database.Countries.Create(_country);
+            }
+            else
+            {
+                Database.Countries.Update(_country);
+            }
+            Database.Save();
         }
 
         public void DelCar(int? id)
@@ -51,7 +61,8 @@ namespace WebAppCar.BL
 
         public void DelCountry(int? id)
         {
-            throw new NotImplementedException();
+            Database.Countries.Delete(id.Value);
+            Database.Save();
         }
 
         public void Dispose()
@@ -80,6 +91,14 @@ namespace WebAppCar.BL
             IEnumerable<Country> val = Database.Countries.GetAll();
             Mapper.Initialize(cfg => cfg.CreateMap<Country, CountryDTO>());
             var result = Mapper.Map<IEnumerable<Country>, IEnumerable<CountryDTO>>(val);
+            return result;
+        }
+
+        public CountryDTO GetCountryById(int? Id)
+        {
+            Country country = Database.Countries.Find(x => x.Id == Id.Value).First();
+            Mapper.Initialize(cfg => cfg.CreateMap<Country, CountryDTO>());
+            var result = Mapper.Map<Country, CountryDTO>(country);
             return result;
         }
     }
