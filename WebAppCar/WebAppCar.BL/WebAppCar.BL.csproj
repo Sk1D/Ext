@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\CarDTO.cs" />
+    <Compile Include="DTO\CountryCarDTO.cs" />
     <Compile Include="DTO\CountryDTO.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Service.cs" />

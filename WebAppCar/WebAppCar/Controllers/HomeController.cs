@@ -16,13 +16,19 @@ namespace WebAppCar.Controllers
     public class HomeController : Controller
     {
         private IService serv;
-        public HomeController()
+        public HomeController(IService service)
         {
-            this.serv = new Service();
+            this.serv = service;
         }
+        
+        //public HomeController()
+        //{
+        //    this.serv = new Service();
+        //}
         // GET: Home
         public ActionResult Index()
         {
+            
 
             IEnumerable<CarDTO> col = serv.GetAllCars();
             Mapper.Initialize(cfg => cfg.CreateMap<CarDTO, CarViewModel>());

@@ -18,5 +18,7 @@ namespace WebAppCar.BL
         void Dispose();
         CarDTO GetCarById(int? id);
         CountryDTO GetCountryById(int? Id);
+        IEnumerable<CountryCarDTO> GetAllRelations();
+
     }
 }

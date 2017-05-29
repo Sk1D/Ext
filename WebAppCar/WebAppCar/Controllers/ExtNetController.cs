@@ -8,15 +8,17 @@ using WebAppCar.BL.DTO;
 using WebAppCar.ViewModel;
 using AutoMapper;
 using System;
+using System.Collections;
+using System.Linq;
 
 namespace WebAppCar.Controllers
 {
     public class ExtNetController : Controller
     {
         private IService serv;
-        public ExtNetController()
+        public ExtNetController(IService service)
         {
-            this.serv = new Service();
+            this.serv = service;
         }
         public ActionResult Index()
         {
@@ -40,24 +42,7 @@ namespace WebAppCar.Controllers
 
             return this.Direct();
         }
-        //public ActionResult CreateCountry()
-        //{
-        //    return View(GetData());
-        //}
-        //private object[] GetData()
-        //{
-        //    return new object[]
-        //    {
-        //    new object[] { "3m Co", 71.72, 0.02, 0.03, "9/1 12:00am" },
-        //    new object[] { "Alcoa Inc", 29.01, 0.42, 1.47, "9/1 12:00am" },
-        //    new object[] { "Altria Group Inc", 83.81, 0.28, 0.34, "9/1 12:00am" }
-        //    };
-        //}
-        //public ActionResult Submit(string company, string lastChange, string pctChange, double price, int rating)
-        //{
-        //    X.Msg.Alert("Company", company).Show();
-        //    return this.Direct();
-        //}
+
         public ActionResult CreateCountry(int? id)
         {
             if (id == null)
@@ -72,7 +57,7 @@ namespace WebAppCar.Controllers
             }
 
         }
- 
+
         public ActionResult SuccessSubmitCountry(CountryViewModel country)
         {
             //X.Msg.Alert("Submit", JSON.Serialize(country)).Show();
@@ -105,22 +90,68 @@ namespace WebAppCar.Controllers
 
         }
 
-        //public ActionResult FailureSubmit(FormCollection values)
+
+
+
+  
+        public DirectResult CellEditing(string id, string field, string oldValue, string newValue, object vmStock)
+        {
+            string json = JSON.Serialize(vmStock);
+            json = json.Substring(2, json.Length - 4).Replace(@"\", "");
+          //  VmStock vmStockObj = JSON.Deserialize<VmStock>(json);
+          CountryCarDTO vmStockObj = JSON.Deserialize<CountryCarDTO>(json);
+            var listOfFieldNamesCar = typeof(CarDTO).GetProperties().Select(f => f.Name== field);
+            var listOfFieldNamesCountry = typeof(CountryDTO).GetProperties().Select(f => f.Name == field);
+            foreach(var item in listOfFieldNamesCar)
+            {
+                if(item==true)
+                {
+                    CarDTO car = new CarDTO { Id = vmStockObj.CarId, Brand = vmStockObj.Brand, Model = vmStockObj.Model };
+                    serv.AddCar(car);
+                }
+            }
+            foreach (var item in listOfFieldNamesCountry)
+            {
+                if (item == true)
+                {
+                    CountryDTO country = new CountryDTO { Id = vmStockObj.CountryId, Continent = vmStockObj.Continent, NameOfContry = vmStockObj.NameOfContry };
+                    serv.AddCountry(country);
+                }
+            }
+            // serv.GetCarById(vmStockObj.CarId);
+            // vmStockObj.Total = vmStockObj.UnitPrice * vmStockObj.Amount;
+
+            Store store = X.GetCmp<Store>("Store");
+            ModelProxy modelProxy = store.GetById(id);
+            //modelProxy.Set("Total", vmStockObj.Total);
+            store.GetById(id).Commit();
+
+            return this.Direct();
+        }
+ 
+        public ActionResult GetDataAction()
+        {
+           var values = serv.GetAllRelations();
+
+            return this.Store(values);
+        }
+       
+        public ActionResult Page3()
+        {
+            return View();
+        }
+        public ActionResult Reload()
+        {
+            return Redirect("Page3");
+        }
+        //public ActionResult Read()
         //{
-        //    var errors = new FieldErrors();
-
-        //    foreach (var key in values.Keys)
-        //    {
-        //        errors.Add(new FieldError(key.ToString(), "Test error for " + key.ToString()));
-        //    }
-
-        //    return this.FormPanel("Error is emulated", errors);
+        //    List<User> lstUsers = new List<User>();
+        //    lstUsers.Add(new User(1000, "Jeff"));
+        //    lstUsers.Add(new User(1001, "James"));
+        //    return this.Store(lstUsers);
         //}
 
-        //public ActionResult DirectEventSubmit(Person person)
-        //{
-        //    X.Msg.Alert("Submit", JSON.Serialize(person)).Show();
-        //    return this.Direct();
-        //}
+
     }
 }

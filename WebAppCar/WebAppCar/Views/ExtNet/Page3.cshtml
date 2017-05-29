@@ -1,0 +1,128 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    @*<script>
+    var edit = function (editor, e) {
+        /*
+        "e" is an edit event with the following properties:
+
+        grid - The grid
+        record - The record that was edited
+        field - The field name that was edited
+        value - The value being set
+        originalValue - The original value for the field, before the edit.
+        row - The grid table row
+        column - The grid Column defining the column that was edited.
+        rowIdx - The row index that was edited
+        colIdx - The column index that was edited
+        */
+
+        // Call DirectMethod
+        if (e.value !== e.originalValue) {
+            Ext.net.DirectMethod.request({
+                url: '@(Url.Action("Edit"))',
+                params: {
+                    id: e.record.data.id,
+                    field: e.field,
+                    oldValue: e.originalValue,
+                    newValue: e.value,
+                    customer: e.record.data
+                }
+            });
+        }
+    };
+
+    </script>*@
+    <title></title>
+</head>
+<body>
+    
+    @Html.X().ResourceManager().ScriptMode(Ext.Net.ScriptMode.Debug).SourceFormatting(true)
+    @*@Html.X().Button().Text("Reload").Handler("App.GridPanel.getStore().reload();")*@
+    @(Html.X().GridPanel()
+        .Width(700)
+        .Frame(true)
+            .Title("Relations")
+            .ID("GridPanel")
+            .Border(true)
+            .Store(Html.X().Store()
+                .ID("Store")
+                .Model(Html.X().Model().IDProperty("ID")
+                .Fields(
+                        new ModelField("CarId", ModelFieldType.Int),
+                        new ModelField("Model", ModelFieldType.String),
+                        new ModelField("Brand", ModelFieldType.String),
+                        new ModelField("CountryId", ModelFieldType.Int),
+                        new ModelField("Continent", ModelFieldType.String),
+                        new ModelField("NameOfContry", ModelFieldType.String)
+
+                    )
+                //.Fields(
+                //    new ModelField("ID", ModelFieldType.Int),
+                //    new ModelField("Name")
+                //    )
+                )
+                .Proxy(Html.X().AjaxProxy().Url(Url.Action("GetDataAction")).Reader(Html.X().JsonReader().RootProperty("data"))))
+            .ColumnModel(
+                Html.X().RowNumbererColumn().Width(50),
+                Html.X().Column().Text("CarId").DataIndex("CarId").Flex(1),
+                Html.X().Column().Text("Model").DataIndex("Model").Editor(Html.X().TextField()),
+                Html.X().Column().Text("Brand").DataIndex("Brand").Editor(Html.X().TextField()),
+                Html.X().Column().Text("CountryId").DataIndex("CountryId"),
+                Html.X().Column().Text("Continent").DataIndex("Continent").Editor(Html.X().TextField()),
+                Html.X().Column().Text("NameOfContry").DataIndex("NameOfContry").Editor(Html.X().TextField())
+            )
+            .SelectionModel
+            (
+                Html.X().RowSelectionModel().Mode(SelectionMode.Single)
+            )
+            .Plugins
+            (
+            Html.X()
+            //.CellEditing().Listeners(ls =>
+            //{
+            //    ls.Edit.Fn = "edit";
+
+            //})
+            .CellEditing()
+            .ClicksToEdit(1)
+            .DirectEvents
+            (
+              de =>
+              {
+                  de.Edit.Url = Url.Action("CellEditing");
+                  de.Edit.ExtraParams.Add(new Parameter("id", "e.record.data.id", ParameterMode.Raw));
+                  de.Edit.ExtraParams.Add(new Parameter("field", "e.field", ParameterMode.Raw));
+                  de.Edit.ExtraParams.Add(new Parameter("oldValue", "e.originalValue", ParameterMode.Raw));
+                  de.Edit.ExtraParams.Add(new Parameter("newValue", "e.value", ParameterMode.Raw));
+                  de.Edit.ExtraParams.Add(new Parameter("vmStock", "e.record.data", ParameterMode.Raw));
+              }
+            )
+            )
+    //.Plugins(
+    //    Html.X().RowExpander().SingleExpand(true).ID("RowExpand")
+    //    .Component(
+    //        Html.X().GridPanel().Border(true).Height(250).ID("AccessgridPanel")
+    //            .Store(Html.X().Store().ID("RowExpanderStore")
+    //                .Model(Html.X().Model()
+    //                    .Fields(
+    //                        new ModelField("ID", ModelFieldType.Int),
+    //                        new ModelField("Option"),
+    //                        new ModelField("IsReadOnly", ModelFieldType.Boolean)
+    //                        )
+    //                    )
+    //                .Proxy(Html.X().AjaxProxy().Url(Url.Action("RowExpander")).Reader(Html.X().JsonReader().RootProperty("data")))
+    //                .AutoLoadParams(new { id = JRawValue.From("this.record.data.ID") }))
+    //            .ColumnModel(
+    //                Html.X().Column().Text("Option").DataIndex("Option").Flex(1),
+    //                Html.X().CheckColumn().Text("Read Only?").DataIndex("IsReadOnly").Width(100).Editable(true)
+    //            )
+    //        )
+
+    //    )
+    )
+    @(Html.X().Button().Text("Reload").DirectClickAction("Reload"))
+</body>
+</html>

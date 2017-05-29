@@ -43,6 +43,11 @@ namespace WebAppCar.DAL.Repositories
                 return db.Cars;
         }
 
+        public IEnumerable<Car> Include()
+        {
+            return db.Cars.Include(t => t.Countries).ToList();
+        }
+
         public void Update(Car value)
         {
             db.Entry(value).State = EntityState.Modified;

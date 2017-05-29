@@ -19,10 +19,10 @@ namespace WebAppCar.BL
         {
             this.Database = uow;
         }
-        public Service()
-        {
-            this.Database = new EFUnitOfWork();
-        }
+        //public Service()
+        //{
+        //    this.Database = new EFUnitOfWork();
+        //}
         public void AddCar(CarDTO carDto)
         {
             Mapper.Initialize(cfg => cfg.CreateMap<CarDTO, Car>());
@@ -101,5 +101,32 @@ namespace WebAppCar.BL
             var result = Mapper.Map<Country, CountryDTO>(country);
             return result;
         }
+        public IEnumerable<CountryCarDTO> GetAllRelations()
+        {
+            //IEnumerable<Car> val = Database.Cars.GetAll();
+            IEnumerable<Car> resultCars= Database.Cars.Include();
+            List<CountryCarDTO> relation = new List<CountryCarDTO>();
+            foreach (Car c in resultCars)
+            {
+                
+                foreach(Country t in c.Countries)
+                {
+                    relation.Add(
+                        new CountryCarDTO
+                        {
+                            CarId=c.Id,
+                            Model=c.Model,
+                            Brand=c.Brand,
+                            CountryId=t.Id,
+                            Continent=t.Continent,
+                            NameOfContry=t.NameOfContry
+                        }
+                        );
+                }
+            }
+            return relation;
+        }
+
+
     }
 }

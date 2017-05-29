@@ -11,5 +11,6 @@ namespace WebAppCar.ViewModel
         public int Id { get; set; }
         public string Continent { get; set; }
         public string NameOfContry { get; set; }
+       
     }
 }

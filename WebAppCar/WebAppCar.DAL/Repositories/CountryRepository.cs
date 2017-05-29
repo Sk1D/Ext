@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebAppCar.DAL.Entities;
 using WebAppCar.DAL.Interfaces;
+using System.Data.Entity;
+
+
 
 namespace WebAppCar.DAL.Repositories
 {
@@ -42,6 +43,11 @@ namespace WebAppCar.DAL.Repositories
         public IEnumerable<Country> GetAll()
         {
             return db.Countries;
+        }
+
+        public IEnumerable<Country> Include()
+        {                     
+            return db.Countries.Include(K=>K.Cars).ToList();
         }
 
         public void Update(Country value)
