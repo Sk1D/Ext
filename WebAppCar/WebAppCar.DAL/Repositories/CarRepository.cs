@@ -48,6 +48,16 @@ namespace WebAppCar.DAL.Repositories
             return db.Cars.Include(t => t.Countries).ToList();
         }
 
+        public void Insert(int SourceId, int DestId)
+        {
+            Car dest = db.Cars.Find(DestId);
+            Country sourc = db.Countries.Find(SourceId);
+            if (dest != null && sourc != null)
+            {
+                dest.Countries.Add(sourc);
+            }
+        }
+
         public void Update(Car value)
         {
             db.Entry(value).State = EntityState.Modified;

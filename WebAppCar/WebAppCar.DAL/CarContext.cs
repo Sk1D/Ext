@@ -36,7 +36,7 @@ namespace WebAppCar.DAL
             db.Countries.Add(country2);
             db.SaveChanges();
         }
-        public class DropCreateDatabaseAlways : DropCreateDatabaseAlways<CarContext>
+        public class DropCreateDatabaseAlways : DropCreateDatabaseIfModelChanges<CarContext>
         {
             protected override void Seed(CarContext context)
             {

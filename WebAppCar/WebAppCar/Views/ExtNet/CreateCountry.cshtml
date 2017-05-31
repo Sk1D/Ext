@@ -7,66 +7,46 @@
 }
 @section headtag
 {
-    @*<script>
-        function success(btn) {
-            submit(btn.up('window').down('form'), '@Url.Action("SuccessSubmit")');
-        }
 
-        function failure(btn) {
-            submit(btn.up('window').down('form'), '@Url.Action("FailureSubmit")');
-        }
-
-        function submit(form, url) {
-            form.submit({
-                url: url,
-                waitMsg: "Submitting...",
-                success: function (form, action) {
-                    // server responded with success = true
-                    var result = action.result;
-                },
-                failure: function (form, action) {
-                    if (action.failureType === Ext.form.action.Action.CONNECT_FAILURE) {
-                        Ext.Msg.alert('Error',
-                            'Status:' + action.response.status + ': ' +
-                            action.response.statusText);
-                    }
-                    if (action.failureType === Ext.form.action.Action.SERVER_INVALID) {
-                        // server responded with success = false
-                        Ext.Msg.alert('Invalid', action.result.errorMessage);
-                    }
-                }
-            })
-        }
-    </script>*@
 }
 
 @section example
 {@(
- Html.X().Window()
-            .Title("Country")
-            .Width(250)
-            .Height(200)
-            .Layout(LayoutType.Fit)
-            .Closable(false)
-            .Border(false)
-            .Items(
-                Html.X().FormPanel()
-                    .ID("FormPanelCountry")
-                    .Frame(true)
-                    .DefaultAnchor("100%")
-                    .BodyPadding(6)
-                    .FieldDefaults(def =>
-                    {
-                        def.MsgTarget = MessageTarget.Side;
-                    })
-                    .Items(
-                        Html.X().HiddenFor(m => m.Id),
-                        Html.X().TextFieldFor(m => m.Continent),
-                        Html.X().TextFieldFor(m => m.NameOfContry)
-                    )
+     Html.X().Window()
+                .Title("Country")
+                .Width(250)
+                .Height(200)
+                .Layout(LayoutType.Fit)
+                .Closable(false)
+                .Border(false)
+                .Items(
+                    Html.X().FormPanel()
+                        .ID("FormPanelCountry")
+                        .Frame(true)
+                        .DefaultAnchor("100%")
+                        .BodyPadding(6)
+                        .FieldDefaults(def =>
+                        {
+                            def.MsgTarget = MessageTarget.Side;
+                        })
+                        .Items(items =>
+                        {
+                            items.Add(Html.X().HiddenFor(m => m.Id));
+                            items.Add(Html.X().TextFieldFor(m => m.Continent));
+                            items.Add(Html.X().TextFieldFor(m => m.NameOfContry));
+
+                        })
             )
 
             .Buttons(
+                Html.X().Button()
+                .Text("add Cars")
+                .DirectEvents(de =>
+                {
+                    de.Click.Url = Url.Action("ShowListCars");
+                    de.Click.EventMask.ShowMask = true;
+                    
+                }),
                 Html.X().Button()
                 .Text("Submit")
                 .DirectEvents(de =>
@@ -78,67 +58,5 @@
 
             )
 )
-@( Html.X().Window()
-       .Title("Cars")
-       .Layout(LayoutType.Fit)
-       .Closable(false)
-       .Border(false)
-       .Items(
-        Html.X().Panel()
-                .Title("Submit")
-                .BodyPadding(10)
-                .Layout(LayoutType.Table)
-                .LayoutConfig(new TableLayoutConfig() { Columns = 1 })
-                .Items(
-                    Html.X().Label().Html("<div class='label'>Indexes, Values and Text Submit</div>"),
-                    Html.X().Panel()
-                        .Border(false)
-                        .Width(300)
-                        .Height(250)
-                        .Layout(LayoutType.Fit)
-                        .Items(
-                           Html.X().MultiSelect()
-                                .ID("MultiSelect3")
-                                .CustomConfig(c => c.Add(new ConfigItem("submitText", "false", ParameterMode.Raw)))
-                                // .Items(Model
 
-                                //ViewBag.Data
-                                .Items(items =>
-                                {
-                                    for (int i = 0; i < 5; i++)
-                                    {
-                                        items.Add(Html.X().ListItem().Text("aa" + i.ToString()).Value(i.ToString()));
-                                    }
-
-                                }
-
-                                //Html.X().ListItem().Text("Item 1").Value("1"),
-                                //Html.X().ListItem().Text("Item 2").Value("2"),
-                                // Html.X().ListItem().Text("Item 3").Value("3"),
-                                // Html.X().ListItem().Text("Item 4").Value("4"),
-                                // Html.X().ListItem().Text("Item 5").Value("5")
-
-                                )
-                        //.SelectedItems(
-                        //   Html.X().ListItem().Value("1"),
-                        //  Html.X().ListItem().Value("3")
-
-                        //)
-                        )
-                        .BottomBar(
-                            Html.X().Toolbar()
-                                .Items(
-                                    Html.X().ToolbarFill(),
-                                    Html.X().Button()
-                                        .Text("Submit")
-                                        .DirectEvents(de =>
-                                        {
-                                            de.Click.Action = "SubmitSelection1";
-                                            de.Click.ExtraParams.Add(new Parameter("items", "App.MultiSelect3.getSubmitArray()", ParameterMode.Raw));
-                                        })
-                                )
-                        )
-                )
-    )
-)
 }

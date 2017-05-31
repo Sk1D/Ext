@@ -197,11 +197,10 @@
     <Content Include="Views\Home\Page2.cshtml" />
     <Content Include="Views\Home\CreateCar.cshtml" />
     <Content Include="Views\Home\Country.cshtml" />
-    <Content Include="Views\ExtNet\Index.cshtml" />
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
     <Content Include="Views\ExtNet\CreateCountry.cshtml" />
-    <Content Include="Views\ExtNet\Test2.cshtml" />
     <Content Include="Views\ExtNet\Page3.cshtml" />
+    <Content Include="Views\ExtNet\ShowListCars.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

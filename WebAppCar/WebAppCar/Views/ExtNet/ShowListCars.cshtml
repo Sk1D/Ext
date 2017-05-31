@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Submit";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section example
+{
+    @( 
+        Html.X().Window()
+           .Title("Cars")
+           .Layout(LayoutType.Fit)
+           .Closable(false)
+           .Border(false)
+           .Items(
+        Html.X().Panel()
+                .BodyPadding(10)
+                .Layout(LayoutType.Table)
+                .LayoutConfig(new TableLayoutConfig() { Columns = 1 })
+                .Items(
+
+                    Html.X().Panel()
+                        .Border(false)
+                        .Width(300)
+                        .Height(300)
+                        .Layout(LayoutType.Fit)
+                        .Items(
+                           Html.X().MultiSelect()
+                                .ID("MultiSelect3")
+                                .CustomConfig(c => c.Add(new ConfigItem("submitText", "false", ParameterMode.Raw)))
+                                 .Items(ViewBag.Data)
+
+                        )
+                        .BottomBar(
+                            Html.X().Toolbar()
+                                .Items(
+                                    Html.X().ToolbarFill(),
+                                    Html.X().Button()
+                                        .Text("Submit")
+                                        .DirectEvents(de =>
+                                        {
+
+                                            de.Click.ExtraParams.Add(new Parameter("CountryId", "2"));
+                                            de.Click.Action = "SubmitSelectionCarList";
+                                            de.Click.ExtraParams.Add(new Parameter("items", "App.MultiSelect3.getSubmitArray()", ParameterMode.Raw));
+                                        })
+                                )
+                        )
+                )
+    )
+    )
+}

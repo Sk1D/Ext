@@ -15,5 +15,6 @@ namespace WebAppCar.DAL.Interfaces
         void Delete(int id);
         IEnumerable<T> Find(Func<T, Boolean> predicate);
         IEnumerable<T> Include();
+        void Insert(int SourceId,int DestId);
     }
 }

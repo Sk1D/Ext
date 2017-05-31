@@ -19,6 +19,8 @@ namespace WebAppCar.BL
         CarDTO GetCarById(int? id);
         CountryDTO GetCountryById(int? Id);
         IEnumerable<CountryCarDTO> GetAllRelations();
+        void addCarToCountry(int idCar, int idCountry);
+        void addCountryToCar(int idCar, int idCountry);
 
     }
 }

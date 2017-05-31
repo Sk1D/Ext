@@ -127,6 +127,16 @@ namespace WebAppCar.BL
             return relation;
         }
 
+        public void addCarToCountry(int idCar, int idCountry)
+        {
+            Database.Countries.Insert(idCar, idCountry);
+            Database.Save();
+        }
 
+        public void addCountryToCar(int idCar, int idCountry)
+        {
+            Database.Cars.Insert(idCountry, idCar);
+            Database.Save();
+        }
     }
 }

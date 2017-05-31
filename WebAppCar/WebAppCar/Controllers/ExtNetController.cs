@@ -10,6 +10,7 @@ using AutoMapper;
 using System;
 using System.Collections;
 using System.Linq;
+using System.Text;
 
 namespace WebAppCar.Controllers
 {
@@ -20,33 +21,15 @@ namespace WebAppCar.Controllers
         {
             this.serv = service;
         }
-        //public ActionResult Index()
-        //{
-        //    ExtNetModel model = new ExtNetModel()
-        //    {
-        //        Title = "Welcome to Ext.NET",
-        //        TextAreaEmptyText = ">> Enter a Message Here <<"
-        //    };
 
-        //    return this.View(model);
-        //}
-
-        //public ActionResult SampleAction(string message)
-        //{
-        //    X.Msg.Notify(new NotificationConfig
-        //    {
-        //        Icon = Icon.Accept,
-        //        Title = "Working",
-        //        Html = message
-        //    }).Show();
-
-        //    return this.Direct();
-        //}
 
         public ActionResult CreateCountry(int? id)
         {
             if (id == null)
+            {               
                 return View();
+            }
+
             else
             {
                 CountryDTO country = serv.GetCountryById(id.Value);
@@ -57,7 +40,38 @@ namespace WebAppCar.Controllers
             }
 
         }
+        public ActionResult ShowListCars()
+        {
+            List<Ext.Net.ListItem> _list = new List<Ext.Net.ListItem>();
+            List<CarDTO> _cars = serv.GetAllCars().ToList();
+            foreach (var item in _cars)
+            {
+                _list.Add(new Ext.Net.ListItem(item.Brand + " " + item.Model, item.Id));
+            }
+            ViewBag.Data = _list;
+            return View();
+        }
+        public ActionResult SubmitSelectionCarList()
+        {
+            List<ListItem> items = JSON.Deserialize<List<ListItem>>(Request.Params["items"]);
+            int idCountry = Convert.ToInt32(JSON.Deserialize<String>(Request.Params["CountryId"]));
+            StringBuilder sb = new StringBuilder(256);
+            sb.Append("Ext.Msg.alert('Selection', '");
 
+            foreach (Ext.Net.ListItem item in items)
+            {
+
+                serv.addCarToCountry(Convert.ToInt32(item.Value), idCountry);
+              //  sb.AppendFormat("Value={0}, Index={1}, Text={2} <br/>", item.Value, item.Index, item.Text);
+            }
+
+            // sb.Append("');");
+
+            //  X.AddScript(sb.ToString());
+
+            //  return this.Direct();
+            return RedirectToAction("Page3", "ExtNet");
+        }
         public ActionResult SuccessSubmitCountry(CountryViewModel country)
         {
             //X.Msg.Alert("Submit", JSON.Serialize(country)).Show();
