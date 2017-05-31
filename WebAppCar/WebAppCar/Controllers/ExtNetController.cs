@@ -20,28 +20,28 @@ namespace WebAppCar.Controllers
         {
             this.serv = service;
         }
-        public ActionResult Index()
-        {
-            ExtNetModel model = new ExtNetModel()
-            {
-                Title = "Welcome to Ext.NET",
-                TextAreaEmptyText = ">> Enter a Message Here <<"
-            };
+        //public ActionResult Index()
+        //{
+        //    ExtNetModel model = new ExtNetModel()
+        //    {
+        //        Title = "Welcome to Ext.NET",
+        //        TextAreaEmptyText = ">> Enter a Message Here <<"
+        //    };
 
-            return this.View(model);
-        }
+        //    return this.View(model);
+        //}
 
-        public ActionResult SampleAction(string message)
-        {
-            X.Msg.Notify(new NotificationConfig
-            {
-                Icon = Icon.Accept,
-                Title = "Working",
-                Html = message
-            }).Show();
+        //public ActionResult SampleAction(string message)
+        //{
+        //    X.Msg.Notify(new NotificationConfig
+        //    {
+        //        Icon = Icon.Accept,
+        //        Title = "Working",
+        //        Html = message
+        //    }).Show();
 
-            return this.Direct();
-        }
+        //    return this.Direct();
+        //}
 
         public ActionResult CreateCountry(int? id)
         {
@@ -98,7 +98,6 @@ namespace WebAppCar.Controllers
         {
             string json = JSON.Serialize(vmStock);
             json = json.Substring(2, json.Length - 4).Replace(@"\", "");
-          //  VmStock vmStockObj = JSON.Deserialize<VmStock>(json);
           CountryCarDTO vmStockObj = JSON.Deserialize<CountryCarDTO>(json);
             var listOfFieldNamesCar = typeof(CarDTO).GetProperties().Select(f => f.Name== field);
             var listOfFieldNamesCountry = typeof(CountryDTO).GetProperties().Select(f => f.Name == field);
@@ -118,12 +117,10 @@ namespace WebAppCar.Controllers
                     serv.AddCountry(country);
                 }
             }
-            // serv.GetCarById(vmStockObj.CarId);
-            // vmStockObj.Total = vmStockObj.UnitPrice * vmStockObj.Amount;
+
 
             Store store = X.GetCmp<Store>("Store");
             ModelProxy modelProxy = store.GetById(id);
-            //modelProxy.Set("Total", vmStockObj.Total);
             store.GetById(id).Commit();
 
             return this.Direct();
@@ -144,13 +141,7 @@ namespace WebAppCar.Controllers
         {
             return Redirect("Page3");
         }
-        //public ActionResult Read()
-        //{
-        //    List<User> lstUsers = new List<User>();
-        //    lstUsers.Add(new User(1000, "Jeff"));
-        //    lstUsers.Add(new User(1001, "James"));
-        //    return this.Store(lstUsers);
-        //}
+
 
 
     }

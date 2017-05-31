@@ -7,7 +7,7 @@
 }
 @section headtag
 {
-    <script>
+    @*<script>
         function success(btn) {
             submit(btn.up('window').down('form'), '@Url.Action("SuccessSubmit")');
         }
@@ -37,7 +37,7 @@
                 }
             })
         }
-    </script>
+    </script>*@
 }
 
 @section example
@@ -63,7 +63,6 @@
                         Html.X().HiddenFor(m => m.Id),
                         Html.X().TextFieldFor(m => m.Continent),
                         Html.X().TextFieldFor(m => m.NameOfContry)
-                        //Html.X().ComboBoxFor(m=>m.)
                     )
             )
 
